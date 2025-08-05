@@ -119,6 +119,12 @@ body {
     position: relative
 }
 
+.Doosan{
+     font-family: "Poppins", sans-serif;
+     font-weight: 300;
+}
+
+
 ol,
 ul {
     margin: 0;
@@ -2607,8 +2613,20 @@ body.mobile-nav-active #mobile-nav-toggle {
     }
 }
 
+/* Default (desktop) hover behavior */
 .gallery-area .single-gallery .content:hover .content-overlay {
-    opacity: .8
+    opacity: 0.8;
+}
+
+/* Mobile view: disable hover and show overlay by default */
+@media (max-width: 768px) {
+  .gallery-area .single-gallery .content .content-overlay {
+    opacity: 0.8 !important; /* Always visible */
+  }
+
+  .gallery-area .single-gallery .content:hover .content-overlay {
+    opacity: 0.8 !important; /* Prevent change on hover */
+  }
 }
 
 .gallery-area .single-gallery .content-details {
@@ -2631,10 +2649,10 @@ body.mobile-nav-active #mobile-nav-toggle {
 .gallery-area .single-gallery .content-title {
     width: 60%;
     border-bottom: 1px solid #c6b069;
-    font-size: 18px;
+    font-size: 22px;
     color: #fff;
     font-weight: 500;
-    padding: 20px 0px
+    padding: 10px 0px
 }
 
 @media (max-width: 414px) {
@@ -2644,11 +2662,51 @@ body.mobile-nav-active #mobile-nav-toggle {
     }
 }
 
-.gallery-area .single-gallery .content:hover .content-details {
-    top: 50%;
-    left: 50%;
-    opacity: 1
+/* Desktop - show on hover */
+.gallery-area .single-gallery .content .content-details {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
 }
+
+.gallery-area .single-gallery .content:hover .content-details {
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+}
+
+/* Initial fadeIn-bottom positioning */
+.gallery-area .single-gallery .fadeIn-bottom {
+  top: 80%;
+}
+
+/* Mobile - override hover behavior */
+@media screen and (max-width: 768px) {
+  .gallery-area .single-gallery .content .content-details {
+    top: 80% !important;   /* same as fadeIn-bottom */
+    left: 50%;
+    opacity: 1 !important; /* make it always visible */
+    transform: translate(-50%, -50%);
+  }
+
+  /* Disable hover transition on mobile */
+  .gallery-area .single-gallery .content:hover .content-details {
+    top: 10% !important;
+    opacity: 1 !important;
+  }
+
+  .content-details {
+    margin-top: -90px;
+  }
+  
+}
+
+
+
+
 
 .gallery-area .single-gallery .content-image {
     width: 100%
@@ -2659,9 +2717,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     font-size: 0.8em
 }
 
-.gallery-area .single-gallery .fadeIn-bottom {
-    top: 80%
-}
+
 
 @media (max-width: 768px) {
   .single-gallery .content-image {
